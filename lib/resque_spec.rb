@@ -2,6 +2,8 @@ require 'resque_spec/ext'
 require 'resque_spec/helpers'
 require 'resque_spec/matchers'
 
+require 'active_support/hash_with_indifferent_access'
+
 module ResqueSpec
   extend self
 
@@ -91,10 +93,7 @@ module ResqueSpec
   end
 
   def payload_with_string_keys(payload)
-    {
-      'class' => payload[:class],
-      'args' => payload[:args]
-    }
+    HashWithIndifferentAccess.new(payload)
   end
 end
 
